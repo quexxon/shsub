@@ -31,7 +31,7 @@ struct iframe {
 	enum token lookahead;
 } istack[MAXINCL], *isp = istack;
 
-char *progname, *tmplname, *script;
+char *progname, *tmplname, *script, *esc_seq;
 enum token lookahead;
 int cstack[3], *csp = cstack, lineno = 1;
 char token[MAXTOKEN];
@@ -54,6 +54,7 @@ void syserr(void);
 int main(int argc, char **argv)
 {
 	char *sh = "/bin/sh", tmp[] = "/tmp/shsub.XXXXXX";
+	esc_seq = "'\\''";
 	int fd, op, exe = 1;
 	FILE *in, *out;
 	struct stat st;
@@ -65,7 +66,7 @@ int main(int argc, char **argv)
 		if (!strcmp(argv[1], "--help"))
 			help();
 	}
-	while ((op = getopt(argc, argv, "s:co:")) != -1)
+	while ((op = getopt(argc, argv, "s:co:e:")) != -1)
 		switch (op) {
 		case 's':
 			sh = optarg;
@@ -75,6 +76,9 @@ int main(int argc, char **argv)
 			break;
 		case 'o':
 			script = optarg;
+			break;
+		case 'e':
+			esc_seq = optarg;
 			break;
 		default:
 			err("Call with `--help` for usage");
@@ -279,7 +283,7 @@ void text(int esc, FILE *in, FILE *ou)
 			else if (esc == 1)
 				for (s = token; *s; ++s) {
 					if (*s == '\'')
-						fputs("'\\''", ou);
+						fputs(esc_seq, ou);
 					else
 						fputc(*s, ou);
 				}

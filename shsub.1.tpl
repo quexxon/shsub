@@ -50,6 +50,11 @@ Compile the template without execution
 \fB\-o\fR \fIpath\fR
 Set the path of the output script if \fB-c\fR is enabled
 
+.TP
+\fB\-e\fR \fIescape_sequence\fR
+Set the sequence for escaping single quotes
+(default: \fB'\\''\fR)
+
 .SH AUTHORS
 
 Shsub was created by

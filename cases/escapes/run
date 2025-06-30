@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+shsub -c input.tpl > default.tmp
+diff -u default.out default.tmp
+
+shsub -s/usr/local/bin/rc -e "''" -c input.tpl > altrc.tmp
+diff -u altrc.out altrc.tmp
