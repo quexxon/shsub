@@ -347,7 +347,7 @@ void rmscr(void)
 void version(void)
 {
 	fputs(
-	"Shsub 2.1.2 <https://github.com/dongyx/shsub>\n"
+	"Shsub 2.2.0 <https://github.com/dongyx/shsub>\n"
 	"Copyright (c) 2022 DONG Yuxuan <https://www.dyx.name>\n"
 	, stdout);
 	exit(0);
