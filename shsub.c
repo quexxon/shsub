@@ -31,7 +31,7 @@ struct iframe {
 	enum token lookahead;
 } istack[MAXINCL], *isp = istack;
 
-char *progname, *tmplname, *script, *esc_seq;
+char *progname, *tmplname, *script, *escseq;
 enum token lookahead;
 int cstack[3], *csp = cstack, lineno = 1;
 char token[MAXTOKEN];
@@ -54,7 +54,7 @@ void syserr(void);
 int main(int argc, char **argv)
 {
 	char *sh = "/bin/sh", tmp[] = "/tmp/shsub.XXXXXX";
-	esc_seq = "'\\''";
+	escseq = "'\\''";
 	int fd, op, exe = 1;
 	FILE *in, *out;
 	struct stat st;
@@ -78,7 +78,7 @@ int main(int argc, char **argv)
 			script = optarg;
 			break;
 		case 'e':
-			esc_seq = optarg;
+			escseq = optarg;
 			break;
 		default:
 			err("Call with `--help` for usage");
@@ -283,7 +283,7 @@ void text(int esc, FILE *in, FILE *ou)
 			else if (esc == 1)
 				for (s = token; *s; ++s) {
 					if (*s == '\'')
-						fputs(esc_seq, ou);
+						fputs(escseq, ou);
 					else
 						fputc(*s, ou);
 				}
@@ -366,6 +366,9 @@ void help(void)
 	"	-c	Compile without execution\n"
 	"	-o PATH	Set the path of the output script\n"
 	"		(default: the standard output)\n"
+	"	-e ESCAPE_SEQUENCE\n"
+	"		Set the sequence for escaping single quotes\n"
+	"		(default: '\\'')\n"
 	"FURTHER DOCUMENTATION\n"
 	"	See the man page\n"
 	"	See <https://github.com/dongyx/shsub>\n"
