@@ -112,6 +112,10 @@ Credits
 
 Shsub was created by [DONG Yuxuan](https://www.dyx.name) in 2022.
 
+Other code contributors:
+
+- [Will Clardy](https://quexxon.net)
+
 [Chris Wellons (*skeeto*)](https://nullprogram.com) reviewed the code
 and gave useful advice.
 
