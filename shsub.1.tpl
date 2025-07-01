@@ -60,6 +60,10 @@ Set the sequence for escaping single quotes
 Shsub was created by
 DONG Yuxuan <https://www.dyx.name> in 2022.
 
+Other contributors:
+
+Will Clardy <https://quexxon.net>
+
 .SH VERSION
 
 This man page is for Shsub <%="$version"%>.
